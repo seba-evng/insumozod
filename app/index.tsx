@@ -1,15 +1,19 @@
-import { Text, View } from "react-native";
+import React, { useState } from 'react';
+import { SafeAreaView, StatusBar } from 'react-native';
+import { LoginScreen } from '../screens/LoginScreen';
+import { RegisterScreen } from '../screens/RegisterScreen';
 
 export default function Index() {
+  const [showRegister, setShowRegister] = useState(false);
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+    <SafeAreaView className="flex-1 bg-gray-50">
+      <StatusBar barStyle="dark-content" />
+      {!showRegister ? (
+        <LoginScreen onNavigateToRegister={() => setShowRegister(true)} />
+      ) : (
+        <RegisterScreen onNavigateToLogin={() => setShowRegister(false)} />
+      )}
+    </SafeAreaView>
   );
 }
